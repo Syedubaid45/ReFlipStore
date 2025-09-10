@@ -1,3 +1,4 @@
+import 'package:device_frame_plus/device_frame_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'splash_viewmodel.dart';
@@ -11,24 +12,37 @@ class SplashView extends StackedView<SplashViewModel> {
     SplashViewModel viewModel,
     Widget? child,
   ) {
-    final logoHeight = MediaQuery.of(context).size.height * 0.4;
-    final logoWidth = MediaQuery.of(context).size.width * 0.4;
+    final logoSize = MediaQuery.of(context).size.height * 0.3;
 
-    return SafeArea(
-      child: Scaffold(
-        body: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [Color(0xFFC1839F), Color(0xffFF5A5F)],
+    return DeviceFrame(
+      device: Devices.ios.iPhone13ProMax,
+      isFrameVisible: true,
+      orientation: Orientation.portrait,
+      screen: SafeArea(
+        child: Scaffold(
+          body: Container(
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [Colors.pinkAccent, Colors.red],
+              ),
             ),
-          ),
-          child: Center(
-            child: Image(
-              image: AssetImage("assets/images/logo.t.png"),
-              height: logoHeight,
-              width: logoWidth,
+            child: Center(
+              child: Container(
+                height: logoSize,
+                width: logoSize,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(100),
+                  color: Colors.white,
+                ),
+                child: Center(
+                  child: Text(
+                    "ReFlip",
+                    style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ),
             ),
           ),
         ),

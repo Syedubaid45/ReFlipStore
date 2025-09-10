@@ -1,3 +1,4 @@
+import 'package:device_frame_plus/device_frame_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:reflip_store/ui/views/product/widgets/BottomActionBar%20.dart';
 import 'package:reflip_store/ui/views/product/widgets/ProductActions%20.dart';
@@ -20,44 +21,51 @@ class ProductDetailView extends StackedView<ProductDetailViewModel> {
   ) {
     final product = viewModel.product!;
 
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            AppHeader2(onBack: viewModel.navigateBack),
+    return DeviceFrame(
+      device: Devices.ios.iPhone13ProMax,
+      isFrameVisible: true,
+      orientation: Orientation.portrait,
+      screen: Scaffold(
+        backgroundColor: Colors.white,
+        body: SafeArea(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                AppHeader2(onBack: viewModel.navigateBack),
 
-            const SizedBox(height: 16),
+                const SizedBox(height: 16),
 
-            ProductHeaderImage(imageUrl: product.image),
+                ProductHeaderImage(imageUrl: product.image),
 
-            const SizedBox(height: 20),
+                const SizedBox(height: 20),
 
-            ProductTitleRow(title: product.title),
+                ProductTitleRow(title: product.title),
 
-            const SizedBox(height: 8),
+                const SizedBox(height: 8),
 
-            ProductPriceSection(
-              price: product.price,
-              subtitle: product.subtitle,
+                ProductPriceSection(
+                  price: product.price,
+                  subtitle: product.subtitle,
+                ),
+
+                const SizedBox(height: 16),
+
+                ProductActions(onSearch: viewModel.searchOnGoogle),
+
+                const SizedBox(height: 24),
+
+                const SimilarProductsList(),
+              ],
             ),
-
-            const SizedBox(height: 16),
-
-            ProductActions(onSearch: viewModel.searchOnGoogle),
-
-            const SizedBox(height: 24),
-
-            const SimilarProductsList(),
-          ],
+          ),
         ),
-      ),
 
-      bottomNavigationBar: BottomActionBar(
-        onSave: viewModel.saveItem,
-        onBuy: viewModel.navigateToPurchase,
+        bottomNavigationBar: BottomActionBar(
+          onSave: viewModel.saveItem,
+          onBuy: viewModel.navigateToPurchase,
+        ),
       ),
     );
   }

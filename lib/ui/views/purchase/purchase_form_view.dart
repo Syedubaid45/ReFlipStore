@@ -1,3 +1,4 @@
+import 'package:device_frame_plus/device_frame_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:reflip_store/models/product_model.dart';
 import 'package:reflip_store/ui/views/purchase/widgets/ShippingAdd_card.dart';
@@ -20,53 +21,55 @@ class PurchaseView extends StackedView<PurchaseViewModel> {
     PurchaseViewModel viewModel,
     Widget? child,
   ) {
-    return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 20),
+    return DeviceFrame(
+      device: Devices.ios.iPhone13ProMax,
+      isFrameVisible: true,
+      orientation: Orientation.portrait,
+      screen: Scaffold(
+        body: SafeArea(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(height: 20),
 
-              AppHeader2(
-                onBack: () {
-                  viewModel.goBack();
-                },
-              ),
-              const SizedBox(height: 30),
+                AppHeader2(
+                  onBack: () {
+                    viewModel.goBack();
+                  },
+                ),
+                const SizedBox(height: 30),
 
-              ProgressStepper(
-                currentIndex: viewModel.currentIndex,
-                itemCount: 3,
-              ),
-              const SizedBox(height: 40),
+                ProgressStepper(
+                  currentIndex: viewModel.currentIndex,
+                  itemCount: 3,
+                ),
+                const SizedBox(height: 40),
 
-              ProductCardPayment(
-                title: viewModel.product.title,
-                subtitle: viewModel.product.subtitle,
-                price: viewModel.product.price,
-                imageUrl: viewModel.product.image,
-              ),
-              const SizedBox(height: 20),
+                ProductCardPayment(
+                  title: viewModel.product.title,
+                  subtitle: viewModel.product.subtitle,
+                  price: viewModel.product.price,
+                  imageUrl: viewModel.product.image,
+                ),
+                const SizedBox(height: 20),
 
-              ShippingAddressCard(address: viewModel.shippingAddress),
-              const SizedBox(height: 20),
+                ShippingAddressCard(address: viewModel.shippingAddress),
+                const SizedBox(height: 20),
 
-              InvoiceDetailsCard(
-                productPrice: product.price,
-                shippingFee: viewModel.shippingFee,
-                total: viewModel.total,
-              ),
+                InvoiceDetailsCard(
+                  productPrice: product.price,
+                  shippingFee: viewModel.shippingFee,
+                  total: viewModel.total,
+                ),
 
-              const SizedBox(height: 80),
-            ],
+                const SizedBox(height: 80),
+              ],
+            ),
           ),
         ),
-      ),
-      bottomNavigationBar: Container(
-        padding: const EdgeInsets.all(16),
-        child: paymentFlowButton(
+        bottomNavigationBar: paymentFlowButton(
           text: "Proceed To Payment",
           onPressed: viewModel.proceedToPayment,
         ),

@@ -1,3 +1,4 @@
+import 'package:device_frame_plus/device_frame_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:reflip_store/models/product_model.dart';
 import 'package:reflip_store/ui/views/order_confirmation/widgets/paymentSuccess_card.dart';
@@ -28,47 +29,58 @@ class OrderConfirmationView extends StackedView<OrderConfirmationViewModel> {
     OrderConfirmationViewModel viewModel,
     Widget? child,
   ) {
-    return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            SizedBox(height: 20),
-            AppHeader2(
-              onBack: () {
-                viewModel.navigateBack();
-              },
+    return DeviceFrame(
+      device: Devices.ios.iPhone13ProMax,
+      isFrameVisible: true,
+      orientation: Orientation.portrait,
+      screen: Scaffold(
+        body: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(height: 20),
+                AppHeader2(
+                  onBack: () {
+                    viewModel.navigateBack();
+                  },
+                ),
+                SizedBox(height: 30),
+                ProgressStepper(
+                  currentIndex: viewModel.currentIndex,
+                  itemCount: 3,
+                ),
+                const SizedBox(height: 40),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: Text(
+                    "Order Confirmed",
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  ),
+                ),
+                const SizedBox(height: 20),
+                PaymentSuccessCard(totalAmount: totalAmount),
+                const SizedBox(height: 40),
+                ProductCardPayment(
+                  backgroundColor: const Color.fromARGB(255, 146, 204, 176),
+                  title: viewModel.product.title,
+                  subtitle: viewModel.product.subtitle,
+                  price: viewModel.product.price,
+                  imageUrl: viewModel.product.image,
+                ),
+              ],
             ),
-            SizedBox(height: 30),
-            ProgressStepper(currentIndex: viewModel.currentIndex, itemCount: 3),
-            const SizedBox(height: 40),
-            Align(
-              alignment: Alignment.topLeft,
-              child: Text(
-                "Order Confirmed",
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-              ),
-            ),
-            const SizedBox(height: 20),
-            PaymentSuccessCard(totalAmount: totalAmount),
-            const SizedBox(height: 40),
-            ProductCardPayment(
-              backgroundColor: const Color.fromARGB(255, 146, 204, 176),
-              title: viewModel.product.title,
-              subtitle: viewModel.product.subtitle,
-              price: viewModel.product.price,
-              imageUrl: viewModel.product.image,
-            ),
-          ],
+          ),
         ),
-      ),
-      bottomNavigationBar: paymentFlowButton(
-        onPressed: () {
-          viewModel.navigateToHome();
-        },
-        text: "Go to home",
+
+        bottomNavigationBar: paymentFlowButton(
+          onPressed: () {
+            viewModel.navigateToHome();
+          },
+          text: "Go to home",
+        ),
       ),
     );
   }

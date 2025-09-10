@@ -1,14 +1,16 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:reflip_store/app/app.locator.dart';
 import 'package:reflip_store/app/app.router.dart';
-import 'package:reflip_store/ui/views/account/account_view.dart';
-import 'package:reflip_store/ui/views/home/home_view.dart';
-import 'package:reflip_store/ui/views/listings/my_listings_view.dart';
-import 'package:reflip_store/ui/views/sidebar/sidebar_view.dart';
+import 'package:reflip_store/firebase_options.dart';
 import 'package:reflip_store/ui/views/splash/splash_view.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
   await setupLocator();
   runApp(const MyApp());
 }
