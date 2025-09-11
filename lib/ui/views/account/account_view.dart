@@ -1,4 +1,3 @@
-import 'package:device_frame_plus/device_frame_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'account_viewmodel.dart';
@@ -13,100 +12,95 @@ class AccountView extends StackedView<AccountViewModel> {
     AccountViewModel viewModel,
     Widget? child,
   ) {
-    return DeviceFrame(
-      device: Devices.ios.iPhone13ProMax,
-      isFrameVisible: true,
-      orientation: Orientation.portrait,
-      screen: Scaffold(
-        backgroundColor: Colors.white,
-        body: SafeArea(
-          child: SingleChildScrollView(
-            padding: const EdgeInsets.all(20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      children: [
-                        const CircleAvatar(
-                          radius: 36,
-                          backgroundImage: AssetImage("assets/profile.jpg"),
-                        ),
-                        const SizedBox(width: 12),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: const [
-                            Text(
-                              "Alice Eve",
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.red,
-                              ),
-                            ),
-                            Text(
-                              "alice.eve@gmail.com",
-                              style: TextStyle(
-                                fontSize: 14,
-                                color: Colors.black54,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                    GestureDetector(
-                      onTap: viewModel.closeView,
-                      child: const Icon(Icons.close, size: 36),
-                    ),
-                  ],
-                ),
-
-                const SizedBox(height: 24),
-
-                const Text(
-                  "My account",
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                ),
-
-                const SizedBox(height: 20),
-
-                const InfoField(label: "Name:", value: "Alice Eve"),
-                const SizedBox(height: 16),
-                const InfoField(label: "Email:", value: "alice.eve@gmail.com"),
-                const SizedBox(height: 16),
-                const InfoField(label: "Phone:", value: "+1 561-230-0033"),
-                const SizedBox(height: 16),
-                const InfoField(
-                  label: "Address:",
-                  value:
-                      "Alice Eve\n2074, Half and Half Drive\nHialeah, Florida - 33012\nPh: +1 561-230-0033",
-                  maxLines: 4,
-                ),
-
-                const SizedBox(height: 28),
-
-                Padding(
-                  padding: const EdgeInsets.only(top: 8),
-                  child: OutlinedButton.icon(
-                    onPressed: viewModel.goToSettings,
-                    style: OutlinedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      const CircleAvatar(
+                        radius: 36,
+                        backgroundImage: AssetImage("assets/profile.jpg"),
                       ),
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 20,
-                        vertical: 14,
+                      const SizedBox(width: 12),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: const [
+                          Text(
+                            "Alice Eve",
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.red,
+                            ),
+                          ),
+                          Text(
+                            "alice.eve@gmail.com",
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: Colors.black54,
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                    icon: const Icon(Icons.settings_outlined),
-                    label: const Text("Settings"),
+                    ],
                   ),
+                  GestureDetector(
+                    onTap: viewModel.closeView,
+                    child: const Icon(Icons.close, size: 36),
+                  ),
+                ],
+              ),
+
+              const SizedBox(height: 24),
+
+              const Text(
+                "My account",
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+
+              const SizedBox(height: 20),
+
+              const InfoField(label: "Name:", value: "Alice Eve"),
+              const SizedBox(height: 16),
+              const InfoField(label: "Email:", value: "alice.eve@gmail.com"),
+              const SizedBox(height: 16),
+              const InfoField(label: "Phone:", value: "+1 561-230-0033"),
+              const SizedBox(height: 16),
+              const InfoField(
+                label: "Address:",
+                value:
+                    "Alice Eve\n2074, Half and Half Drive\nHialeah, Florida - 33012\nPh: +1 561-230-0033",
+                maxLines: 4,
+              ),
+
+              const SizedBox(height: 28),
+
+              Padding(
+                padding: const EdgeInsets.only(top: 8),
+                child: OutlinedButton.icon(
+                  onPressed: viewModel.goToSettings,
+                  style: OutlinedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 20,
+                      vertical: 14,
+                    ),
+                  ),
+                  icon: const Icon(Icons.settings_outlined),
+                  label: const Text("Settings"),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

@@ -1,4 +1,3 @@
-import 'package:device_frame_plus/device_frame_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:reflip_store/ui/views/home/tabs/liked_items_tab/likeditemTab_view.dart';
 import 'package:stacked/stacked.dart';
@@ -13,26 +12,21 @@ class HomeView extends StackedView<HomeViewModel> {
 
   @override
   Widget builder(BuildContext context, HomeViewModel viewModel, Widget? child) {
-    return DeviceFrame(
-      device: Devices.ios.iPhone13ProMax,
-      isFrameVisible: true,
-      orientation: Orientation.portrait,
-      screen: Scaffold(
-        extendBody: true,
-        body: IndexedStack(
-          index: viewModel.currentIndex,
-          children: [
-            HometabView(homeViewModel: viewModel),
-            ExploreTabView(homeViewModel: viewModel),
-            Center(child: Text("Camera Not Implemented")),
-            LikedItemsView(homeViewModel: viewModel),
-            MessagesTabView(),
-          ],
-        ),
-        bottomNavigationBar: CustomBottomNav(
-          currentIndex: viewModel.currentIndex,
-          onTap: viewModel.setIndex,
-        ),
+    return Scaffold(
+      extendBody: true,
+      body: IndexedStack(
+        index: viewModel.currentIndex,
+        children: [
+          HometabView(homeViewModel: viewModel),
+          ExploreTabView(homeViewModel: viewModel),
+          Center(child: Text("Camera Not Implemented")),
+          LikedItemsView(homeViewModel: viewModel),
+          MessagesTabView(),
+        ],
+      ),
+      bottomNavigationBar: CustomBottomNav(
+        currentIndex: viewModel.currentIndex,
+        onTap: viewModel.setIndex,
       ),
     );
   }

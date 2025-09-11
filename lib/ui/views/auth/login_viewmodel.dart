@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:reflip_store/app/app.locator.dart';
 import 'package:reflip_store/app/app.router.dart';
 import 'package:reflip_store/services/auth_service.dart';
+import 'package:reflip_store/utils/general_utils/utils.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
@@ -17,11 +18,7 @@ class LoginViewModel extends BaseViewModel {
   TextEditingController get emailController => _emailController;
   TextEditingController get passwordController => _passwordController;
 
-  void toggleAuth() {
-    _navigationService.navigateToSignupView();
-  }
-
-  Future<void> login() async {
+  Future<void> login(BuildContext context) async {
     setBusy(true);
     try {
       final user = await _authService.login(
@@ -29,18 +26,29 @@ class LoginViewModel extends BaseViewModel {
         _passwordController.text.trim(),
       );
 
+      if (!context.mounted) return;
+
       if (user != null) {
+        Utils.flushBarMessage(context, "Login successful!", isError: false);
         _navigationService.replaceWithHomeView();
       } else {
-        errorMessage = "Login failed. Try again.";
-        notifyListeners();
+        Utils.flushBarMessage(
+          context,
+          "Login failed. Try again.",
+          isError: true,
+        );
       }
     } catch (e) {
-      errorMessage = e.toString();
-      notifyListeners();
+      if (!context.mounted) return;
+
+      Utils.flushBarMessage(context, e.toString(), isError: true);
     } finally {
       setBusy(false);
     }
+  }
+
+  void toggleAuth() {
+    _navigationService.navigateToSignupView();
   }
 
   void signupWithGoogle() {

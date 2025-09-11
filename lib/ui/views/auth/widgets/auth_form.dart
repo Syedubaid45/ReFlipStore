@@ -9,6 +9,7 @@ class AuthForm extends StatelessWidget {
   final TextEditingController? nameController;
   final VoidCallback onSubmit;
   final VoidCallback onToggleAuth;
+  final bool isBusy;
 
   const AuthForm({
     super.key,
@@ -18,6 +19,7 @@ class AuthForm extends StatelessWidget {
     this.nameController,
     required this.onSubmit,
     required this.onToggleAuth,
+    required this.isBusy,
   });
 
   @override
@@ -46,6 +48,7 @@ class AuthForm extends StatelessWidget {
         ),
         const SizedBox(height: 20),
         ElevatedButtonWidget(
+          isBusy: isBusy,
           onPressed: onSubmit,
           text: isSignup ? "Signup" : "Login",
           color: Colors.pinkAccent,

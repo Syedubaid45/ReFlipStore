@@ -8,13 +8,17 @@ class Utils {
     Fluttertoast.showToast(msg: message);
   }
 
-  static void flushBarErrorMessage(String message, BuildContext context) {
+  static void flushBarMessage(
+    BuildContext context,
+    String message, {
+    bool isError = true,
+  }) {
     showFlushbar(
       context: context,
       flushbar: Flushbar(
         message: message,
         duration: Duration(seconds: 3),
-        backgroundColor: Colors.red,
+        backgroundColor: isError ? Colors.red : Colors.green,
         flushbarPosition: FlushbarPosition.TOP,
         margin: EdgeInsets.all(8),
         borderRadius: BorderRadius.circular(8),

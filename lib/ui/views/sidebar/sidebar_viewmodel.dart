@@ -8,7 +8,7 @@ class SidebarViewModel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();
 
   void closeSidebar() {
-    _navigationService.back();
+    _navigationService.navigateToHomeView();
   }
 
   void goToAccount() {
